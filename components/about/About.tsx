@@ -20,7 +20,7 @@ export function About() {
                     </p>
                     <div className="grid grid-cols-2 gap-4 pt-4">
                         <StatCard number="50K+" label="Followers" />
-                        <StatCard number="1080p" label="Quality" />
+
                     </div>
                 </div>
 

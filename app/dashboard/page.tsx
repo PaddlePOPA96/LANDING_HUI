@@ -18,24 +18,9 @@ export default function DashboardPage() {
         crosshair: ''
     });
 
-    // Gear State
-    const [gear, setGear] = useState({
-        mouse: '',
-        mouseLink: '',
-        mouseImage: '',
-        keyboard: '',
-        keyboardLink: '',
-        keyboardImage: '',
-        headset: '',
-        headsetLink: '',
-        headsetImage: '',
-        monitor: '',
-        monitorLink: '',
-        monitorImage: '',
-        mousepad: '',
-        mousepadLink: '',
-        mousepadImage: ''
-    });
+    // Dynamic Gear State
+    // Default to an empty array. We will migrate old data structure simply by overwriting it.
+    const [gearItems, setGearItems] = useState<Array<{ category: string, name: string, link: string, image: string, id: string }>>([]);
 
     const [saving, setSaving] = useState(false);
     const [msg, setMsg] = useState('');
@@ -53,7 +38,19 @@ export default function DashboardPage() {
                 if (valSnap.exists()) setValSettings(valSnap.data() as any);
 
                 const gearSnap = await getDoc(doc(db, "settings", "gear"));
-                if (gearSnap.exists()) setGear(gearSnap.data() as any);
+                if (gearSnap.exists()) {
+                    const data = gearSnap.data();
+                    // Check if it's the new array format or old object format
+                    if (Array.isArray(data.items)) {
+                        setGearItems(data.items);
+                    } else {
+                        // If old format, we just start fresh or could try to migrate, but user agreed to reset.
+                        // However, let's try to be nice and migrate if possible, or just start manual.
+                        // Given instruction, we'll start with an empty list or migration if desired.
+                        // Let's just start with an empty list as agreed, but maybe add one example if empty.
+                        setGearItems([]);
+                    }
+                }
             };
             fetchData();
         }
@@ -63,7 +60,8 @@ export default function DashboardPage() {
         setSaving(true);
         try {
             await setDoc(doc(db, "settings", "valorant"), valSettings);
-            await setDoc(doc(db, "settings", "gear"), gear);
+            // Save as an object containing the array, for future extensibility
+            await setDoc(doc(db, "settings", "gear"), { items: gearItems });
             setMsg('Saved successfully!');
             setTimeout(() => setMsg(''), 3000);
         } catch (e) {
@@ -78,6 +76,22 @@ export default function DashboardPage() {
         await auth.signOut();
         router.push('/login');
     }
+
+    const addGearItem = () => {
+        setGearItems([...gearItems, { category: '', name: '', link: '', image: '', id: Date.now().toString() }]);
+    };
+
+    const updateGearItem = (index: number, field: string, value: string) => {
+        const newItems = [...gearItems];
+        (newItems[index] as any)[field] = value;
+        setGearItems(newItems);
+    };
+
+    const removeGearItem = (index: number) => {
+        const newItems = [...gearItems];
+        newItems.splice(index, 1);
+        setGearItems(newItems);
+    };
 
     if (loading || !user) return <div className="h-screen flex items-center justify-center dark:text-white"><Loader2 className="animate-spin" /></div>;
 
@@ -97,14 +111,14 @@ export default function DashboardPage() {
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 gap-8">
 
                     {/* Valorant Settings Card */}
                     <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-sm">
                         <h2 className="text-xl font-bold uppercase mb-6 flex items-center gap-2 text-red-500">
                             Valorant Settings
                         </h2>
-                        <div className="space-y-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Sensitivity</label>
                                 <input
@@ -125,7 +139,7 @@ export default function DashboardPage() {
                                     placeholder="e.g. 800"
                                 />
                             </div>
-                            <div>
+                            <div className="md:col-span-2">
                                 <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Crosshair Code</label>
                                 <textarea
                                     className="w-full bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-red-500 h-24 font-mono text-xs"
@@ -137,142 +151,81 @@ export default function DashboardPage() {
                         </div>
                     </div>
 
-                    {/* Gear Card */}
+                    {/* Gear Card (Dynamic) */}
                     <div className="bg-white dark:bg-zinc-900 rounded-2xl p-6 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                        <h2 className="text-xl font-bold uppercase mb-6 flex items-center gap-2 text-indigo-500">
-                            Streaming Gear
-                        </h2>
+                        <div className="flex justify-between items-center mb-6">
+                            <h2 className="text-xl font-bold uppercase flex items-center gap-2 text-indigo-500">
+                                Streaming Gear
+                            </h2>
+                            <button
+                                onClick={addGearItem}
+                                className="bg-indigo-500/10 text-indigo-500 hover:bg-indigo-500 hover:text-white px-4 py-2 rounded-lg font-bold text-xs transition-all"
+                            >
+                                + Add Item
+                            </button>
+                        </div>
+
                         <div className="space-y-4">
-                            <div>
-                                <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Mouse</label>
-                                <input
-                                    type="text"
-                                    className="w-full bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500 mb-2"
-                                    value={gear.mouse}
-                                    onChange={e => setGear({ ...gear, mouse: e.target.value })}
-                                    placeholder="Device Name"
-                                />
-                                <div className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.mouseLink || ''}
-                                        onChange={e => setGear({ ...gear, mouseLink: e.target.value })}
-                                        placeholder="Buy Link (URL)"
-                                    />
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.mouseImage || ''}
-                                        onChange={e => setGear({ ...gear, mouseImage: e.target.value })}
-                                        placeholder="Image URL"
-                                    />
+                            {gearItems.map((item, index) => (
+                                <div key={item.id} className="bg-zinc-50 dark:bg-zinc-950/50 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 relative group">
+                                    <button
+                                        onClick={() => removeGearItem(index)}
+                                        className="absolute top-2 right-2 text-zinc-400 hover:text-red-500 p-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                                        title="Remove Item"
+                                    >
+                                        <LogOut size={16} /> {/* Reusing LogOut icon as remove icon due to limited imports, or import X/Trash if available later */}
+                                    </button>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Category (e.g. Mouse)</label>
+                                            <input
+                                                type="text"
+                                                className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-2 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
+                                                value={item.category}
+                                                onChange={e => updateGearItem(index, 'category', e.target.value)}
+                                                placeholder="Category"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Device Name</label>
+                                            <input
+                                                type="text"
+                                                className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-2 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
+                                                value={item.name}
+                                                onChange={e => updateGearItem(index, 'name', e.target.value)}
+                                                placeholder="Name"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Buy Link</label>
+                                            <input
+                                                type="text"
+                                                className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-2 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
+                                                value={item.link}
+                                                onChange={e => updateGearItem(index, 'link', e.target.value)}
+                                                placeholder="https://..."
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Image URL</label>
+                                            <input
+                                                type="text"
+                                                className="w-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-2 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
+                                                value={item.image}
+                                                onChange={e => updateGearItem(index, 'image', e.target.value)}
+                                                placeholder="https://..."
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Keyboard</label>
-                                <input
-                                    type="text"
-                                    className="w-full bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500 mb-2"
-                                    value={gear.keyboard}
-                                    onChange={e => setGear({ ...gear, keyboard: e.target.value })}
-                                    placeholder="Device Name"
-                                />
-                                <div className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.keyboardLink || ''}
-                                        onChange={e => setGear({ ...gear, keyboardLink: e.target.value })}
-                                        placeholder="Buy Link (URL)"
-                                    />
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.keyboardImage || ''}
-                                        onChange={e => setGear({ ...gear, keyboardImage: e.target.value })}
-                                        placeholder="URL"
-                                    />
+                            ))}
+
+                            {gearItems.length === 0 && (
+                                <div className="text-center p-8 border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-xl text-zinc-400">
+                                    No gear items added yet. Click "Add Item" to start.
                                 </div>
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Headset</label>
-                                <input
-                                    type="text"
-                                    className="w-full bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500 mb-2"
-                                    value={gear.headset}
-                                    onChange={e => setGear({ ...gear, headset: e.target.value })}
-                                    placeholder="Device Name"
-                                />
-                                <div className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.headsetLink || ''}
-                                        onChange={e => setGear({ ...gear, headsetLink: e.target.value })}
-                                        placeholder="Buy Link (URL)"
-                                    />
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.headsetImage || ''}
-                                        onChange={e => setGear({ ...gear, headsetImage: e.target.value })}
-                                        placeholder="Image URL"
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Monitor</label>
-                                <input
-                                    type="text"
-                                    className="w-full bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500 mb-2"
-                                    value={gear.monitor}
-                                    onChange={e => setGear({ ...gear, monitor: e.target.value })}
-                                    placeholder="Device Name"
-                                />
-                                <div className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.monitorLink || ''}
-                                        onChange={e => setGear({ ...gear, monitorLink: e.target.value })}
-                                        placeholder="Buy Link (URL)"
-                                    />
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.monitorImage || ''}
-                                        onChange={e => setGear({ ...gear, monitorImage: e.target.value })}
-                                        placeholder="Image URL"
-                                    />
-                                </div>
-                            </div>
-                            <div>
-                                <label className="block text-xs font-bold text-zinc-500 uppercase mb-1">Mousepad</label>
-                                <input
-                                    type="text"
-                                    className="w-full bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500 mb-2"
-                                    value={gear.mousepad}
-                                    onChange={e => setGear({ ...gear, mousepad: e.target.value })}
-                                    placeholder="Device Name"
-                                />
-                                <div className="flex gap-2">
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.mousepadLink || ''}
-                                        onChange={e => setGear({ ...gear, mousepadLink: e.target.value })}
-                                        placeholder="Buy Link (URL)"
-                                    />
-                                    <input
-                                        type="text"
-                                        className="w-1/2 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-3 rounded-lg dark:text-white outline-none focus:ring-2 focus:ring-indigo-500"
-                                        value={gear.mousepadImage || ''}
-                                        onChange={e => setGear({ ...gear, mousepadImage: e.target.value })}
-                                        placeholder="Image URL"
-                                    />
-                                </div>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>

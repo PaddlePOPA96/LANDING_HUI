@@ -121,7 +121,10 @@ function GearItem({ icon, label, value, link, image }: { icon: any, label: strin
                     <img
                         src={image}
                         alt={value}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        referrerPolicy="no-referrer"
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform backface-hidden"
                     />
                 ) : (
                     <div className="text-zinc-300 dark:text-zinc-700">

@@ -22,8 +22,17 @@ export function Hero() {
     return (
         <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-zinc-950">
             {/* Background Elements */}
-            <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10 blur-sm pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-950 via-transparent to-transparent" />
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop"
+                    alt="Background"
+                    fill
+                    priority
+                    quality={50}
+                    className="object-cover opacity-10 blur-sm"
+                />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-950 via-transparent to-transparent z-[1]" />
 
             {/* Overlapping Title - BEHIND IMAGE */}
             <h1 className="absolute z-[2] text-[18vw] font-black tracking-tighter text-zinc-200 dark:text-zinc-800 pointer-events-none select-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-[40%] opacity-80 whitespace-nowrap">

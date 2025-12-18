@@ -13,10 +13,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ferihui Stream",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://ferihuistream.vercel.app"), 
+  title: {
+    default: "Ferihui Stream",
+    template: "%s | Ferihui Stream",
+  },
   description: "Official Streamer Hub for Ferihui - Gaming, VODs, and more.",
   icons: {
     icon: '/assets/logo.jpg',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  verification: {
+    google: "YOUR_GOOGLE_VERIFICATION_CODE", // TODO: Replace with your actual code
   },
 };
 

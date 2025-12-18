@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description: "Official Hub for Ferihui. Watch high-level Valorant gameplay, funny moments, and live streams. Join the community of gaming enthusiasts.",
   keywords: ["Ferihui", "Valorant", "Streaming", "Gamer", "Indonesia Streamer", "Valorant Clips", "Ferihui Valorant"],
   authors: [{ name: "Ferihui" }],
-  creator: "Ferihui",
+  publisher: "Ferihui",
   openGraph: {
     type: "website",
     locale: "id_ID",
@@ -47,6 +47,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/assets/logo.jpg',
   },
+  manifest: '/manifest.json',
   robots: {
     index: true,
     follow: true,
@@ -63,19 +64,32 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Ferihui",
-  "url": "https://ferihui.vercel.app",
-  "sameAs": [
-    "https://www.youtube.com/@FeriHui",
-    "https://tiktok.com/@feri_hui",
-    "https://instagram.com/feri8huis"
-  ],
-  "jobTitle": "Content Creator & Streamer",
-  "knowsAbout": ["Valorant", "Gaming", "Streaming"]
-};
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Ferihui Stream",
+    "url": "https://ferihui.vercel.app",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://ferihui.vercel.app/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ferihui",
+    "url": "https://ferihui.vercel.app",
+    "sameAs": [
+      "https://www.youtube.com/@FeriHui",
+      "https://tiktok.com/@feri_hui",
+      "https://instagram.com/feri8huis"
+    ],
+    "jobTitle": "Content Creator & Streamer",
+    "knowsAbout": ["Valorant", "Gaming", "Streaming"]
+  }
+];
 
 import { AuthProvider } from "@/components/auth/AuthProvider";
 

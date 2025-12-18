@@ -16,7 +16,7 @@ export function About() {
                         MORE THAN JUST <br /> <span className="text-indigo-600 dark:text-indigo-500">GAMING.</span>
                     </h2>
                     <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                        Welcome to the official hub of <strong>Ferihui</strong>. Bringing you high-energy streams, expert gameplay, and entertainment. Whether it's competitive FPS or casual playthroughs, we create moments that matter.
+                        Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level <strong>Valorant</strong> gameplay and entertaining variety game streams.
                     </p>
                     <div className="grid grid-cols-2 gap-4 pt-4">
                         <StatCard number="50K+" label="Followers" />

@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: "Ferihui Stream - Valorant & Gaming Content",
     template: "%s | Ferihui Stream",
   },
-  description: "Official Hub for Ferihui. Watch high-level Valorant gameplay, funny moments, and live streams. Join the community of gaming enthusiasts.",
+  description: "Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level Valorant gameplay and entertaining variety game streams.",
   keywords: ["Ferihui", "Valorant", "Streaming", "Gamer", "Indonesia Streamer", "Valorant Clips", "Ferihui Valorant"],
   authors: [{ name: "Ferihui" }],
   publisher: "Ferihui",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     locale: "id_ID",
     url: "https://ferihui.vercel.app",
     title: "Ferihui Stream - Valorant & Gaming Content",
-    description: "Official Hub for Ferihui. Watch high-level Valorant gameplay, funny moments, and live streams.",
+    description: "Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level Valorant gameplay and entertaining variety game streams.",
     siteName: "Ferihui Stream",
     images: [
       {

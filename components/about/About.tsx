@@ -31,7 +31,8 @@ export function About() {
                         src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop"
                         alt="Setup"
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110 relative z-10 opacity-80"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110 relative z-10 opacity-80 select-none"
+                        draggable={false}
                     />
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-20" />
                 </div>

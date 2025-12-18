@@ -29,7 +29,8 @@ export function Hero() {
                     fill
                     priority
                     quality={50}
-                    className="object-cover opacity-10 blur-sm"
+                    className="object-cover opacity-10 blur-sm select-none"
+                    draggable={false}
                 />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-950 via-transparent to-transparent z-[1]" />
@@ -46,14 +47,15 @@ export function Hero() {
             </div>
 
             {/* Main Character Image - BIGGER */}
-            <div className="relative z-10 mt-10 w-full max-w-4xl flex justify-center">
+            <div className="relative z-10 mt-10 w-full max-w-4xl flex justify-center pointer-events-none select-none">
                 <Image
                     src="/assets/hui.png"
                     alt="Ferihui Character"
                     width={800}
                     height={900}
-                    className="drop-shadow-2xl animate-in slide-in-from-bottom-10 fade-in duration-1000 object-contain h-[85vh] w-auto"
+                    className="drop-shadow-2xl animate-in slide-in-from-bottom-10 fade-in duration-1000 object-contain h-[85vh] w-auto select-none"
                     priority
+                    draggable={false}
                 />
             </div>
 

@@ -7,13 +7,17 @@ import { Setup } from "../components/setup/Setup";
 import { Sponsors } from "../components/sponsors/Sponsors";
 import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
+import { ParticlesBackground } from "../components/ui/ParticlesBackground";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-sans selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen text-zinc-900 dark:text-zinc-100 font-sans selection:bg-indigo-500 selection:text-white">
 
       {/* Fixed Header */}
       <Header />
+
+      {/* Particle Background */}
+      <ParticlesBackground />
 
       {/* 
         HERO SECTION 

@@ -20,7 +20,7 @@ const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: 
 
 export function Hero() {
     return (
-        <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-white dark:bg-zinc-950">
+        <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 z-0">
                 <Image

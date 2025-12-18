@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://ferihuistream.vercel.app"), 
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://ferihui.vercel.app"),
   title: {
     default: "Ferihui Stream",
     template: "%s | Ferihui Stream",
@@ -27,8 +27,9 @@ export const metadata: Metadata = {
     follow: true,
   },
   verification: {
-    google: "YOUR_GOOGLE_VERIFICATION_CODE", // TODO: Replace with your actual code
+    google: "22mbpa4LDsebEAZJeIkQkBzUWG35KNjTWiuF89nj7GM",
   },
+
 };
 
 import { AuthProvider } from "@/components/auth/AuthProvider";

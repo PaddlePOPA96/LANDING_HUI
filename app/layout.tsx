@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://ferihui.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://ferihui.my.id"),
   title: {
     default: "Ferihui Stream - Valorant & Gaming Content",
     template: "%s | Ferihui Stream",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "id_ID",
-    url: "https://ferihui.vercel.app",
+    url: "https://ferihui.my.id",
     title: "Ferihui Stream - Valorant & Gaming Content",
     description: "Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level Valorant gameplay and entertaining variety game streams.",
     siteName: "Ferihui Stream",
@@ -69,10 +69,10 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Ferihui Stream",
-    "url": "https://ferihui.vercel.app",
+    "url": "https://ferihui.my.id",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://ferihui.vercel.app/search?q={search_term_string}",
+      "target": "https://ferihui.my.id/search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   },
@@ -80,7 +80,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Ferihui",
-    "url": "https://ferihui.vercel.app",
+    "url": "https://ferihui.my.id",
     "sameAs": [
       "https://www.youtube.com/@FeriHui",
       "https://tiktok.com/@feri_hui",

@@ -46,6 +46,8 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/assets/logo.jpg',
+    shortcut: '/assets/logo.jpg',
+    apple: '/assets/logo.jpg',
   },
   manifest: '/manifest.json',
   robots: {

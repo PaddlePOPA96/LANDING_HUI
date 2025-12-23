@@ -45,8 +45,8 @@ export const metadata: Metadata = {
     images: ["/assets/hui.png"],
   },
   icons: {
-    icon: '/assets/logo.jpg',
-    shortcut: '/assets/logo.jpg',
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
     apple: '/assets/logo.jpg',
   },
   manifest: '/manifest.json',

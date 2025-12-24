@@ -34,7 +34,7 @@ export function About() {
 
                 {/* Decorative Image/Element for About */}
                 <Reveal width="100%" className="w-full md:w-1/2" variant="slide-in-right" delay={0.4}>
-                    <div className="h-[400px] bg-zinc-100 dark:bg-zinc-900 rounded-3xl relative overflow-hidden group">
+                    <div className="h-[250px] md:h-[400px] bg-zinc-100 dark:bg-zinc-900 rounded-3xl relative overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-black z-0" />
                         <Image
                             src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop"

@@ -57,7 +57,7 @@ export function Setup() {
                             <h3 className="text-3xl font-bold uppercase flex items-center gap-3 text-red-500 border-b border-zinc-200 dark:border-zinc-800 pb-4">
                                 <Crosshair size={32} /> Valorant Settings
                             </h3>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
                                     <label className="text-sm font-bold text-zinc-500 uppercase block mb-2">Sensitivity</label>
                                     <div className="font-mono text-3xl font-black tracking-tighter">{valSettings.sens || '-'}</div>
@@ -86,7 +86,7 @@ export function Setup() {
                             <h3 className="text-3xl font-bold uppercase flex items-center gap-3 text-indigo-500 border-b border-zinc-200 dark:border-zinc-800 pb-4">
                                 <Keyboard size={32} /> Gear
                             </h3>
-                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 {/* Dynamic Items */}
                                 {gear.items && Array.isArray(gear.items) && gear.items.map((item: any, idx: number) => (
                                     <GearItem

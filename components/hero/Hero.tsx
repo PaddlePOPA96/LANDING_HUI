@@ -21,7 +21,7 @@ const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: 
 
 export function Hero() {
     return (
-        <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+        <section className="sticky top-0 h-screen sm:h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -41,7 +41,7 @@ export function Hero() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 0.8, scale: 1 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="absolute z-[2] text-[18vw] font-black tracking-tighter text-zinc-200 dark:text-zinc-800 pointer-events-none select-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-[40%] whitespace-nowrap"
+                className="absolute z-[2] text-[15vw] md:text-[18vw] font-black tracking-tighter text-zinc-200 dark:text-zinc-800 pointer-events-none select-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-[40%] whitespace-nowrap"
             >
                 FERIHUI
             </motion.h1>
@@ -51,25 +51,25 @@ export function Hero() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 1 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] z-[1] pointer-events-none flex items-center justify-center"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[800px] md:h-[800px] z-[1] pointer-events-none flex items-center justify-center"
             >
                 {/* Stroke/Ring Animation */}
-                <div className="w-full h-full rounded-full border-[8px] border-indigo-500/50 shadow-[0_0_50px_rgba(99,102,241,0.5)] animate-breathe" />
+                <div className="w-full h-full rounded-full border-[4px] md:border-[8px] border-indigo-500/50 shadow-[0_0_30px_rgba(99,102,241,0.5)] md:shadow-[0_0_50px_rgba(99,102,241,0.5)] animate-breathe" />
             </motion.div>
 
             {/* Main Character Image - BIGGER */}
-            <div className="relative z-10 mt-10 w-full max-w-4xl flex justify-center pointer-events-none select-none">
+            <div className="relative z-10 mt-0 md:mt-10 w-full max-w-4xl flex justify-center pointer-events-none select-none">
                 <motion.div
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 1, delay: 0.2 }}
                 >
                     <Image
-                        src="/assets/hui.png"
+                        src="/assets/hui.webp"
                         alt="Ferihui Character"
                         width={800}
                         height={900}
-                        className="drop-shadow-2xl object-contain h-[85vh] w-auto select-none"
+                        className="drop-shadow-2xl object-contain h-[55vh] sm:h-[65vh] md:h-[85vh] w-auto select-none"
                         priority
                         draggable={false}
                     />
@@ -80,7 +80,7 @@ export function Hero() {
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.8, duration: 0.8 }}
-                className="absolute bottom-10 z-20 flex flex-col items-center gap-4"
+                className="absolute bottom-[10%] sm:bottom-10 z-20 flex flex-col items-center gap-4"
             >
                 <div className="flex gap-4">
                     <SocialButton href="https://www.youtube.com/@FeriHui" icon={<Youtube />} label="YouTube" />

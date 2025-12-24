@@ -1,9 +1,12 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import Image from "next/image";
-import { Youtube, Instagram } from 'lucide-react';
+import { Youtube, Instagram, Heart } from 'lucide-react';
 import { SocialButton } from "../ui/SocialButton";
 import { motion } from "framer-motion";
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 // Custom TikTok icon since Lucide might not have it or it varies
 const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
@@ -20,6 +23,34 @@ const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: 
 );
 
 export function Hero() {
+    const [socials, setSocials] = useState({
+        donate: '',
+        youtube: 'https://www.youtube.com/@FeriHui',
+        tiktok: 'https://tiktok.com/@feri_hui',
+        instagram: 'https://instagram.com/feri8huis'
+    });
+
+    useEffect(() => {
+        async function fetchSocials() {
+            try {
+                const docSnap = await getDoc(doc(db, "settings", "socials"));
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    setSocials(prev => ({
+                        ...prev,
+                        donate: data.donate || prev.donate,
+                        youtube: data.youtube || prev.youtube,
+                        tiktok: data.tiktok || prev.tiktok,
+                        instagram: data.instagram || prev.instagram
+                    }));
+                }
+            } catch (e) {
+                console.error("Error fetching socials", e);
+            }
+        }
+        fetchSocials();
+    }, []);
+
     return (
         <section className="sticky top-0 h-screen sm:h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden">
             {/* Background Elements */}
@@ -82,10 +113,13 @@ export function Hero() {
                 transition={{ delay: 0.8, duration: 0.8 }}
                 className="absolute bottom-[10%] sm:bottom-10 z-20 flex flex-col items-center gap-4"
             >
-                <div className="flex gap-4">
-                    <SocialButton href="https://www.youtube.com/@FeriHui" icon={<Youtube />} label="YouTube" />
-                    <SocialButton href="https://tiktok.com/@feri_hui" icon={<TikTokIcon />} label="TikTok" />
-                    <SocialButton href="https://instagram.com/feri8huis" icon={<Instagram />} label="Instagram" />
+                <div className="flex flex-wrap justify-center gap-4 px-4">
+                    {socials.donate && (
+                        <SocialButton href={socials.donate} icon={<Heart fill="currentColor" />} label="Donate" />
+                    )}
+                    <SocialButton href={socials.youtube} icon={<Youtube />} label="YouTube" />
+                    <SocialButton href={socials.tiktok} icon={<TikTokIcon />} label="TikTok" />
+                    <SocialButton href={socials.instagram} icon={<Instagram />} label="Instagram" />
                 </div>
                 <p className="text-zinc-500 font-medium tracking-widest text-sm uppercase">Official Streamer Hub</p>
             </motion.div>

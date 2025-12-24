@@ -1,33 +1,40 @@
 'use client';
 
 import Image from "next/image";
+import { Reveal } from "../ui/Reveal";
 
 export function Sponsors() {
     return (
         <section id="sponsors" className="bg-zinc-50 dark:bg-zinc-900 py-24 border-y border-zinc-200 dark:border-zinc-800">
             <div className="container mx-auto px-6 text-center">
-                <h3 className="text-2xl font-bold mb-12 text-zinc-400 uppercase tracking-widest">Proudly Sponsored By</h3>
+                <Reveal width="100%">
+                    <h3 className="text-2xl font-bold mb-12 text-zinc-400 uppercase tracking-widest">Proudly Sponsored By</h3>
+                </Reveal>
 
                 <div className="flex flex-wrap items-center justify-center gap-12 md:gap-24 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
                     {/* Sponsor 1 */}
-                    <div className="relative w-48 h-24 hover:scale-110 transition-transform">
-                        <Image
-                            src="/assets/sponsor/obsbot.png"
-                            alt="OBSBOT Sponsor"
-                            fill
-                            className="object-contain"
-                        />
-                    </div>
+                    <Reveal delay={0.2}>
+                        <div className="relative w-48 h-24 hover:scale-110 transition-transform">
+                            <Image
+                                src="/assets/sponsor/obsbot.png"
+                                alt="OBSBOT Sponsor"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </Reveal>
 
                     {/* Sponsor 2 */}
-                    <div className="relative w-48 h-24 hover:scale-110 transition-transform">
-                        <Image
-                            src="/assets/sponsor/id2fjgY5xB_logos.png"
-                            alt="Sponsor Logo"
-                            fill
-                            className="object-contain"
-                        />
-                    </div>
+                    <Reveal delay={0.4}>
+                        <div className="relative w-48 h-24 hover:scale-110 transition-transform">
+                            <Image
+                                src="/assets/sponsor/id2fjgY5xB_logos.png"
+                                alt="Sponsor Logo"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </Reveal>
                 </div>
             </div>
         </section>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import { MousePointer2, Keyboard, Headphones, Monitor, Square, Crosshair, Mouse, Zap, Camera, Mic } from 'lucide-react';
+import { Reveal } from "../ui/Reveal";
 
 export function Setup() {
     const [valSettings, setValSettings] = useState<any>(null);
@@ -41,70 +42,76 @@ export function Setup() {
 
     return (
         <section id="setup" className="container mx-auto px-6 py-24 bg-zinc-50 dark:bg-zinc-900/50">
-            <h2 className="text-3xl md:text-5xl font-black italic uppercase text-center mb-16">
-                My <span className="text-indigo-600">Setup</span>
-            </h2>
+            <Reveal>
+                <h2 className="text-3xl md:text-5xl font-black italic uppercase text-center mb-16">
+                    My <span className="text-indigo-600">Setup</span>
+                </h2>
+            </Reveal>
 
             <div className="max-w-6xl mx-auto space-y-20">
 
                 {/* VALORANT SETTINGS */}
                 {valSettings && (
-                    <div className="max-w-4xl mx-auto space-y-8">
-                        <h3 className="text-3xl font-bold uppercase flex items-center gap-3 text-red-500 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-                            <Crosshair size={32} /> Valorant Settings
-                        </h3>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                                <label className="text-sm font-bold text-zinc-500 uppercase block mb-2">Sensitivity</label>
-                                <div className="font-mono text-3xl font-black tracking-tighter">{valSettings.sens || '-'}</div>
-                            </div>
-                            <div className="bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                                <label className="text-sm font-bold text-zinc-500 uppercase block mb-2">DPI</label>
-                                <div className="font-mono text-3xl font-black tracking-tighter">{valSettings.dpi || '-'}</div>
-                            </div>
-                        </div>
-                        {valSettings.crosshair && (
-                            <div className="bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm">
-                                <label className="text-sm font-bold text-zinc-500 uppercase block mb-2">Crosshair Code</label>
-                                <div className="bg-zinc-100 dark:bg-zinc-900 p-4 rounded-xl">
-                                    <code className="text-sm text-zinc-600 dark:text-zinc-400 break-all font-mono">{valSettings.crosshair}</code>
+                    <Reveal delay={0.2} width="100%">
+                        <div className="max-w-4xl mx-auto space-y-8">
+                            <h3 className="text-3xl font-bold uppercase flex items-center gap-3 text-red-500 border-b border-zinc-200 dark:border-zinc-800 pb-4">
+                                <Crosshair size={32} /> Valorant Settings
+                            </h3>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div className="bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                                    <label className="text-sm font-bold text-zinc-500 uppercase block mb-2">Sensitivity</label>
+                                    <div className="font-mono text-3xl font-black tracking-tighter">{valSettings.sens || '-'}</div>
+                                </div>
+                                <div className="bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+                                    <label className="text-sm font-bold text-zinc-500 uppercase block mb-2">DPI</label>
+                                    <div className="font-mono text-3xl font-black tracking-tighter">{valSettings.dpi || '-'}</div>
                                 </div>
                             </div>
-                        )}
-                    </div>
+                            {valSettings.crosshair && (
+                                <div className="bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm">
+                                    <label className="text-sm font-bold text-zinc-500 uppercase block mb-2">Crosshair Code</label>
+                                    <div className="bg-zinc-100 dark:bg-zinc-900 p-4 rounded-xl">
+                                        <code className="text-sm text-zinc-600 dark:text-zinc-400 break-all font-mono">{valSettings.crosshair}</code>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </Reveal>
                 )}
 
                 {/* GEAR */}
                 {gear && (gear.items || gear.mouse) && (
-                    <div className="space-y-8">
-                        <h3 className="text-3xl font-bold uppercase flex items-center gap-3 text-indigo-500 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-                            <Keyboard size={32} /> Gear
-                        </h3>
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {/* Dynamic Items */}
-                            {gear.items && Array.isArray(gear.items) && gear.items.map((item: any, idx: number) => (
-                                <GearItem
-                                    key={item.id || idx}
-                                    icon={getIcon(item.category)}
-                                    label={item.category}
-                                    value={item.name}
-                                    link={item.link}
-                                    image={item.image}
-                                />
-                            ))}
+                    <Reveal delay={0.4} width="100%">
+                        <div className="space-y-8">
+                            <h3 className="text-3xl font-bold uppercase flex items-center gap-3 text-indigo-500 border-b border-zinc-200 dark:border-zinc-800 pb-4">
+                                <Keyboard size={32} /> Gear
+                            </h3>
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {/* Dynamic Items */}
+                                {gear.items && Array.isArray(gear.items) && gear.items.map((item: any, idx: number) => (
+                                    <GearItem
+                                        key={item.id || idx}
+                                        icon={getIcon(item.category)}
+                                        label={item.category}
+                                        value={item.name}
+                                        link={item.link}
+                                        image={item.image}
+                                    />
+                                ))}
 
-                            {/* Fallback for legacy data */}
-                            {!gear.items && gear.mouse && (
-                                <>
-                                    <GearItem icon={<Mouse size={24} />} label="Mouse" value={gear.mouse} link={gear.mouseLink} image={gear.mouseImage} />
-                                    <GearItem icon={<Keyboard size={24} />} label="Keyboard" value={gear.keyboard} link={gear.keyboardLink} image={gear.keyboardImage} />
-                                    <GearItem icon={<Headphones size={24} />} label="Headset" value={gear.headset} link={gear.headsetLink} image={gear.headsetImage} />
-                                    <GearItem icon={<Monitor size={24} />} label="Monitor" value={gear.monitor} link={gear.monitorLink} image={gear.monitorImage} />
-                                    <GearItem icon={<Square size={24} />} label="Mousepad" value={gear.mousepad} link={gear.mousepadLink} image={gear.mousepadImage} />
-                                </>
-                            )}
+                                {/* Fallback for legacy data */}
+                                {!gear.items && gear.mouse && (
+                                    <>
+                                        <GearItem icon={<Mouse size={24} />} label="Mouse" value={gear.mouse} link={gear.mouseLink} image={gear.mouseImage} />
+                                        <GearItem icon={<Keyboard size={24} />} label="Keyboard" value={gear.keyboard} link={gear.keyboardLink} image={gear.keyboardImage} />
+                                        <GearItem icon={<Headphones size={24} />} label="Headset" value={gear.headset} link={gear.headsetLink} image={gear.headsetImage} />
+                                        <GearItem icon={<Monitor size={24} />} label="Monitor" value={gear.monitor} link={gear.monitorLink} image={gear.monitorImage} />
+                                        <GearItem icon={<Square size={24} />} label="Mousepad" value={gear.mousepad} link={gear.mousepadLink} image={gear.mousepadImage} />
+                                    </>
+                                )}
+                            </div>
                         </div>
-                    </div>
+                    </Reveal>
                 )}
 
             </div>

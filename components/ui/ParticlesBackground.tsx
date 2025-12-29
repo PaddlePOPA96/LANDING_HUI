@@ -29,7 +29,7 @@ export const ParticlesBackground = () => {
                                 value: "transparent",
                             },
                         },
-                        fpsLimit: 120,
+                        fpsLimit: 60, // Reduced from 120
                         interactivity: {
                             events: {
                                 onClick: {
@@ -38,7 +38,7 @@ export const ParticlesBackground = () => {
                                 },
                                 onHover: {
                                     enable: true,
-                                    mode: "grab",
+                                    mode: "repulse", // Changed from grab which is more expensive
                                 },
                             },
                             modes: {
@@ -48,12 +48,6 @@ export const ParticlesBackground = () => {
                                 repulse: {
                                     distance: 100,
                                     duration: 0.4,
-                                },
-                                grab: {
-                                    distance: 200,
-                                    links: {
-                                        opacity: 0.5,
-                                    },
                                 },
                             },
                         },
@@ -75,7 +69,7 @@ export const ParticlesBackground = () => {
                                     default: "bounce",
                                 },
                                 random: false,
-                                speed: 2, // Slower speed for background
+                                speed: 1, // Reduced speed
                                 straight: false,
                             },
                             number: {
@@ -83,7 +77,7 @@ export const ParticlesBackground = () => {
                                     enable: true,
                                     // area: 800,
                                 },
-                                value: 80,
+                                value: 40, // Reduced from 80
                             },
                             opacity: {
                                 value: 0.3,
@@ -95,7 +89,7 @@ export const ParticlesBackground = () => {
                                 value: { min: 1, max: 3 },
                             },
                         },
-                        detectRetina: true,
+                        detectRetina: false, // Disabled for performance
                     }}
                 />
             </div>

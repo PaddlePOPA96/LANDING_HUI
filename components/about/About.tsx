@@ -40,6 +40,7 @@ export function About() {
                             src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop"
                             alt="Setup"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="object-cover transition-transform duration-700 group-hover:scale-110 relative z-10 opacity-80 select-none"
                             draggable={false}
                         />

@@ -1,5 +1,3 @@
-'use client';
-
 import { Hero } from "../components/hero/Hero";
 import { About } from "../components/about/About";
 import { Streaming } from "../components/streaming/Streaming";
@@ -8,8 +6,31 @@ import { Sponsors } from "../components/sponsors/Sponsors";
 import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
 import { ParticlesBackground } from "../components/ui/ParticlesBackground";
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
-export default function Home() {
+interface Socials {
+  donate?: string;
+  youtube?: string;
+  tiktok?: string;
+  instagram?: string;
+}
+
+async function getSocials(): Promise<Socials> {
+  try {
+    const docSnap = await getDoc(doc(db, "settings", "socials"));
+    if (docSnap.exists()) {
+      return docSnap.data() as Socials;
+    }
+  } catch (e) {
+    console.error("Error fetching socials", e);
+  }
+  return {};
+}
+
+export default async function Home() {
+  const socials = await getSocials();
+
   return (
     <div className="min-h-screen text-zinc-900 dark:text-zinc-100 font-sans selection:bg-indigo-500 selection:text-white">
 
@@ -23,7 +44,7 @@ export default function Home() {
         HERO SECTION 
         Is 'sticky' inside the component, so it stays fixed while we scroll.
       */}
-      <Hero />
+      <Hero initialSocials={socials} />
 
       {/* 
         CONTENT OVERLAY

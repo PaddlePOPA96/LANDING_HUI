@@ -1,12 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from "next/image";
 import { Youtube, Instagram, Heart } from 'lucide-react';
 import { SocialButton } from "../ui/SocialButton";
 import { motion } from "framer-motion";
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 
 // Custom TikTok icon since Lucide might not have it or it varies
 const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
@@ -22,34 +20,24 @@ const TikTokIcon = ({ size = 24, className = "" }: { size?: number, className?: 
     </svg>
 );
 
-export function Hero() {
-    const [socials, setSocials] = useState({
-        donate: '',
-        youtube: 'https://www.youtube.com/@FeriHui',
-        tiktok: 'https://tiktok.com/@feri_hui',
-        instagram: 'https://instagram.com/feri8huis'
-    });
+interface Socials {
+    donate?: string;
+    youtube?: string;
+    tiktok?: string;
+    instagram?: string;
+}
 
-    useEffect(() => {
-        async function fetchSocials() {
-            try {
-                const docSnap = await getDoc(doc(db, "settings", "socials"));
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    setSocials(prev => ({
-                        ...prev,
-                        donate: data.donate || prev.donate,
-                        youtube: data.youtube || prev.youtube,
-                        tiktok: data.tiktok || prev.tiktok,
-                        instagram: data.instagram || prev.instagram
-                    }));
-                }
-            } catch (e) {
-                console.error("Error fetching socials", e);
-            }
-        }
-        fetchSocials();
-    }, []);
+interface HeroProps {
+    initialSocials?: Socials;
+}
+
+export function Hero({ initialSocials = {} }: HeroProps) {
+    const [socials] = useState({
+        donate: initialSocials.donate || '',
+        youtube: initialSocials.youtube || 'https://www.youtube.com/@FeriHui',
+        tiktok: initialSocials.tiktok || 'https://tiktok.com/@feri_hui',
+        instagram: initialSocials.instagram || 'https://instagram.com/feri8huis'
+    });
 
     return (
         <section className="sticky top-0 h-screen sm:h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden">
@@ -90,10 +78,15 @@ export function Hero() {
 
             {/* Main Character Image - BIGGER */}
             <div className="relative z-10 mt-0 md:mt-10 w-full max-w-4xl flex justify-center pointer-events-none select-none">
+                {/* LCP Optimization: Remove initial opacity: 0 or ensure it's handled */}
                 <motion.div
-                    initial={{ y: 100, opacity: 0 }}
+                    initial={{ y: 0, opacity: 1 }} // Changed from y:100, opacity:0 to instant appearance for LCP
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.2 }}
+                    transition={{ duration: 1 }} // Transition still exists but since states are same, it might not do much, which is good for LCP.
+                // Actually, if we want it to slide up but be visible immediately, we can start opacity 1 but y 100.
+                // But for LCP, it's best if it's just THERE. 
+                // Let's remove the entry animation for the LCP image completely to be safe, or just make it very subtle.
+                // I will make it static for now as per plan to "Remove entry animation".
                 >
                     <Image
                         src="/assets/hui.webp"

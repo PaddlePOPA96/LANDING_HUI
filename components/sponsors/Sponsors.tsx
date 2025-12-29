@@ -19,6 +19,7 @@ export function Sponsors() {
                                 src="/assets/sponsor/obsbot.png"
                                 alt="OBSBOT Sponsor"
                                 fill
+                                sizes="200px"
                                 className="object-contain"
                             />
                         </div>
@@ -31,6 +32,7 @@ export function Sponsors() {
                                 src="/assets/sponsor/id2fjgY5xB_logos.png"
                                 alt="Sponsor Logo"
                                 fill
+                                sizes="200px"
                                 className="object-contain"
                             />
                         </div>

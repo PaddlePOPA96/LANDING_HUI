@@ -12,6 +12,8 @@ const nextConfig: NextConfig = {
         hostname: 'img.youtube.com',
       },
     ],
+    // Explicitly configure qualities to avoid warnings when using non-default qualities
+    qualities: [50, 75],
   },
 };
 

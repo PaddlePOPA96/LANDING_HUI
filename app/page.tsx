@@ -28,8 +28,28 @@ async function getSocials(): Promise<Socials> {
   return {};
 }
 
+async function getSetupData() {
+  try {
+    const [valSnap, gearSnap] = await Promise.all([
+      getDoc(doc(db, "settings", "valorant")),
+      getDoc(doc(db, "settings", "gear"))
+    ]);
+
+    return {
+      valorant: valSnap.exists() ? valSnap.data() : null,
+      gear: gearSnap.exists() ? gearSnap.data() : null
+    };
+  } catch (e) {
+    console.error("Error fetching setup data", e);
+    return { valorant: null, gear: null };
+  }
+}
+
 export default async function Home() {
-  const socials = await getSocials();
+  const [socials, setupData] = await Promise.all([
+    getSocials(),
+    getSetupData()
+  ]);
 
   return (
     <div className="min-h-screen text-zinc-900 dark:text-zinc-100 font-sans selection:bg-indigo-500 selection:text-white">
@@ -54,7 +74,8 @@ export default async function Home() {
       */}
       <div className="relative z-10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-[0_-50px_100px_rgba(0,0,0,0.5)] border-t border-white/10">
         <About />
-        <Setup />
+
+        <Setup valorant={setupData.valorant} gear={setupData.gear} />
         <Streaming />
         <Sponsors />
         <Footer />

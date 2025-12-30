@@ -1,30 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import { MousePointer2, Keyboard, Headphones, Monitor, Square, Crosshair, Mouse, Zap, Camera, Mic } from 'lucide-react';
 import { Reveal } from "../ui/Reveal";
 
-export function Setup() {
-    const [valSettings, setValSettings] = useState<any>(null);
-    const [gear, setGear] = useState<any>(null);
+interface SetupProps {
+    valorant: any;
+    gear: any;
+}
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const valSnap = await getDoc(doc(db, "settings", "valorant"));
-                if (valSnap.exists()) setValSettings(valSnap.data());
-
-                const gearSnap = await getDoc(doc(db, "settings", "gear"));
-                if (gearSnap.exists()) setGear(gearSnap.data());
-            } catch (e) {
-                console.error("Error loading setup data", e);
-            }
-        }
-        fetchData();
-    }, []);
-
+export function Setup({ valorant: valSettings, gear }: SetupProps) {
     if (!valSettings && !gear) return null; // Don't show if empty
 
     // Helper to get icon based on category name

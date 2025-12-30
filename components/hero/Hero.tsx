@@ -88,7 +88,7 @@ export function Hero({ initialSocials = {} }: HeroProps) {
                 // I will make it static for now as per plan to "Remove entry animation".
                 >
                     <Image
-                        src="/assets/hui.webp"
+                        src="/assets/hui.png"
                         alt="Ferihui Character"
                         width={800}
                         height={900}

@@ -45,10 +45,46 @@ async function getSetupData() {
   }
 }
 
+async function getStreams() {
+  try {
+    const CHANNEL_ID = 'UCt_Mm5sdOOYG8wgi9r2MnAg';
+    const RSS_URL = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+    const response = await fetch(RSS_URL, { next: { revalidate: 3600 } }); // Cache for 1 hour
+    const text = await response.text();
+
+    const streams = [];
+    const entries = text.split('<entry>');
+
+    for (let i = 1; i < entries.length; i++) {
+      const entry = entries[i];
+      const titleMatch = entry.match(/<title>(.*?)<\/title>/);
+      const videoIdMatch = entry.match(/<yt:videoId>(.*?)<\/yt:videoId>/);
+      const publishedMatch = entry.match(/<published>(.*?)<\/published>/);
+      const viewsMatch = entry.match(/<media:statistics views="(\d+)"/);
+
+      if (titleMatch && videoIdMatch) {
+        streams.push({
+          id: i,
+          videoId: videoIdMatch[1],
+          title: titleMatch[1],
+          time: new Date(publishedMatch ? publishedMatch[1] : Date.now()).toLocaleDateString(),
+          views: viewsMatch ? `${(parseInt(viewsMatch[1]) / 1000).toFixed(1)}K views` : 'New',
+          image: `https://img.youtube.com/vi/${videoIdMatch[1]}/hqdefault.jpg`
+        });
+      }
+    }
+    return streams.slice(0, 5);
+  } catch (error) {
+    console.error('Error fetching streams:', error);
+    return [];
+  }
+}
+
 export default async function Home() {
-  const [socials, setupData] = await Promise.all([
+  const [socials, setupData, streams] = await Promise.all([
     getSocials(),
-    getSetupData()
+    getSetupData(),
+    getStreams()
   ]);
 
   return (
@@ -76,7 +112,7 @@ export default async function Home() {
         <About />
 
         <Setup valorant={setupData.valorant} gear={setupData.gear} />
-        <Streaming />
+        <Streaming streams={streams} />
         <Sponsors />
         <Footer />
       </div>

@@ -47,7 +47,6 @@ export function Hero({ initialSocials = {} }: HeroProps) {
                     src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop"
                     alt="Background"
                     fill
-                    priority
                     quality={50}
                     className="object-cover opacity-10 blur-sm select-none"
                     draggable={false}

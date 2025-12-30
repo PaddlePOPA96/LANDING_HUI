@@ -58,7 +58,7 @@ export function Hero({ initialSocials = {} }: HeroProps) {
             <motion.h1
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 0.8, scale: 1 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
+                transition={{ delay: 0.6, duration: 1.5, ease: "easeOut" }}
                 className="absolute z-[2] text-[15vw] md:text-[18vw] font-black tracking-tighter text-zinc-200 dark:text-zinc-800 pointer-events-none select-none top-1/2 left-1/2 -translate-x-1/2 -translate-y-[40%] whitespace-nowrap"
             >
                 FERIHUI
@@ -66,9 +66,9 @@ export function Hero({ initialSocials = {} }: HeroProps) {
 
             {/* Animated Circle Background - WRAPPER FOR POSITION */}
             <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5, duration: 1 }}
+                initial={{ opacity: 1, scale: 0.08 }} // 64px (loading) / 800px (hero) = 0.08
+                animate={{ opacity: 1, scale: 1 }}    // Expand to full size
+                transition={{ duration: 0.8, ease: "easeInOut" }} // Faster, smooth expansion
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] md:w-[800px] md:h-[800px] z-[1] pointer-events-none flex items-center justify-center"
             >
                 {/* Stroke/Ring Animation */}
@@ -79,9 +79,9 @@ export function Hero({ initialSocials = {} }: HeroProps) {
             <div className="relative z-10 mt-0 md:mt-10 w-full max-w-4xl flex justify-center pointer-events-none select-none">
                 {/* LCP Optimization: Remove initial opacity: 0 or ensure it's handled */}
                 <motion.div
-                    initial={{ y: 0, opacity: 1 }} // Changed from y:100, opacity:0 to instant appearance for LCP
+                    initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 1 }} // Transition still exists but since states are same, it might not do much, which is good for LCP.
+                    transition={{ delay: 0.6, duration: 1 }} // Wait for ring to expand
                 // Actually, if we want it to slide up but be visible immediately, we can start opacity 1 but y 100.
                 // But for LCP, it's best if it's just THERE. 
                 // Let's remove the entry animation for the LCP image completely to be safe, or just make it very subtle.
@@ -102,7 +102,7 @@ export function Hero({ initialSocials = {} }: HeroProps) {
             <motion.div
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
+                transition={{ delay: 1, duration: 0.8 }}
                 className="absolute bottom-[10%] sm:bottom-10 z-20 flex flex-col items-center gap-4"
             >
                 <div className="flex flex-wrap justify-center gap-4 px-4">

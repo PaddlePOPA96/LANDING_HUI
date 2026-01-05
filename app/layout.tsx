@@ -70,32 +70,46 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Ferihui Stream",
-    "url": "https://www.ferihui.my.id",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://www.ferihui.my.id/search?q={search_term_string}",
-      "query-input": "required name=search_term_string"
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://www.ferihui.my.id/#profilepage",
+      "url": "https://www.ferihui.my.id",
+      "name": "Ferihui Stream - Valorant & Gaming Content",
+      "mainEntity": {
+        "@type": "Person",
+        "@id": "https://www.ferihui.my.id/#person",
+        "name": "Ferihui",
+        "alternateName": "Feri Hui",
+        "description": "Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level Valorant gameplay and entertaining variety game streams.",
+        "image": "https://www.ferihui.my.id/assets/hui.png",
+        "sameAs": [
+          "https://www.youtube.com/@FeriHui",
+          "https://tiktok.com/@feri_hui",
+          "https://instagram.com/feri8hui"
+        ],
+        "jobTitle": "Content Creator & Streamer",
+        "knowsAbout": ["Valorant", "Gaming", "Streaming"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.ferihui.my.id/#website",
+      "url": "https://www.ferihui.my.id",
+      "name": "Ferihui Stream",
+      "publisher": {
+        "@id": "https://www.ferihui.my.id/#person"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.ferihui.my.id/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Ferihui",
-    "url": "https://www.ferihui.my.id",
-    "sameAs": [
-      "https://www.youtube.com/@FeriHui",
-      "https://tiktok.com/@feri_hui",
-      "https://instagram.com/feri8huis"
-    ],
-    "jobTitle": "Content Creator & Streamer",
-    "knowsAbout": ["Valorant", "Gaming", "Streaming"]
-  }
-];
+  ]
+};
 
 import { AuthProvider } from "@/components/auth/AuthProvider";
 

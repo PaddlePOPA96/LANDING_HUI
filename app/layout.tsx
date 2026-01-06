@@ -14,9 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://www.ferihui.my.id"),
-  alternates: {
-    canonical: '/',
-  },
+
 
   title: {
     default: "Ferihui Stream - Valorant & Gaming Content",

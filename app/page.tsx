@@ -6,8 +6,11 @@ import { Sponsors } from "../components/sponsors/Sponsors";
 import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
 import { ParticlesBackground } from "../components/ui/ParticlesBackground";
+import { LiveHeaderIndicator } from "../components/layout/LiveHeaderIndicator";
+import { Suspense } from "react";
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import { checkLiveStatus } from "@/lib/videoUtils";
 
 interface Socials {
   donate?: string;
@@ -87,11 +90,17 @@ export default async function Home() {
     getStreams()
   ]);
 
+  const liveIndicator = (
+    <Suspense fallback={null}>
+      <LiveHeaderIndicator />
+    </Suspense>
+  );
+
   return (
     <div className="min-h-screen text-zinc-900 dark:text-zinc-100 font-sans selection:bg-indigo-500 selection:text-white">
 
       {/* Fixed Header */}
-      <Header />
+      <Header liveIndicator={liveIndicator} />
 
       {/* Particle Background */}
       <ParticlesBackground />

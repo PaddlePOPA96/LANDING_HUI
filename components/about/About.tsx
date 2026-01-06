@@ -22,7 +22,7 @@ export function About() {
                     </Reveal>
                     <Reveal delay={0.2}>
                         <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                            Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level <strong>Valorant</strong> gameplay and entertaining variety game streams.
+                            Ferihui is a content creator and streamer with over 5 years of experience. Formerly part of <strong className="text-indigo-600 dark:text-indigo-400">Deddy Corbuzier&apos;s Team (Close The Door)</strong>, he combines professional broadcast quality with high-level <strong>Valorant</strong> gameplay and entertaining variety streams.
                         </p>
                     </Reveal>
                     <Reveal delay={0.3}>
@@ -32,21 +32,17 @@ export function About() {
                     </Reveal>
                 </div>
 
-                {/* Decorative Image/Element for About */}
-                <Reveal width="100%" className="w-full md:w-1/2" variant="slide-in-right" delay={0.4}>
-                    <div className="h-[250px] md:h-[400px] bg-zinc-100 dark:bg-zinc-900 rounded-3xl relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-black z-0" />
+                <div className="flex justify-end relative">
+                    <div className="relative w-full max-w-sm">
                         <Image
-                            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1000&auto=format&fit=crop"
-                            alt="Setup"
-                            fill
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            className="object-cover transition-transform duration-700 group-hover:scale-110 relative z-10 opacity-80 select-none"
-                            draggable={false}
+                            src="/assets/profile.webp"
+                            alt="Ferihui"
+                            width={600}
+                            height={800}
+                            className="object-contain drop-shadow-2xl mask-image-gradient"
                         />
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-20" />
                     </div>
-                </Reveal>
+                </div>
             </div>
         </section>
     );

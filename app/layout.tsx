@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://www.ferihui.my.id"),
+  metadataBase: new URL((process.env.NEXT_PUBLIC_APP_URL || "https://www.ferihui.my.id").replace(/^http:\/\//, "https://")),
   alternates: {
     canonical: '/',
   },

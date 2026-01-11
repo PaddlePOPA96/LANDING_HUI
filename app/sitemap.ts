@@ -1,8 +1,12 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    // Ensure the URL always uses https://
-    const baseUrl = (process.env.NEXT_PUBLIC_APP_URL || 'https://www.ferihui.my.id').replace(/^http:\/\//, 'https://');
+    const baseUrl = 'https://www.ferihui.my.id';
+
+    // Use a fixed date or current date for lastModified. 
+    // Ideally, this should come from your data source (e.g., database or git commit time).
+    // For now, using new Date() effectively means "now", which is fine for dynamic routes,
+    // but Google might prefer stable dates if content hasn't changed.
     const currentDate = new Date();
 
     return [

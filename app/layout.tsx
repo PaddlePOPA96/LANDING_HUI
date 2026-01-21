@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Ferihui Stream",
   },
   description: "Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level Valorant gameplay and entertaining variety game streams.",
-  keywords: ["Ferihui", "Valorant Streamer", "Gaming Creator", "Indonesia Vtuber", "Valorant Clips", "Ferihui Valorant", "Live Streaming", "Content Creator Indonesia"],
+  keywords: ["Ferihui", "Valorant Streamer", "Gaming Creator", "Indonesia Vtuber", "Valorant Clips", "Ferihui Valorant", "Live Streaming", "Content Creator Indonesia", "restream", "watch party valorant vct", "watch party", "watchparty"],
   authors: [{ name: "Ferihui" }],
   publisher: "Ferihui",
   openGraph: {

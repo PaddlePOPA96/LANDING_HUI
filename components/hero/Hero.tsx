@@ -89,7 +89,7 @@ export function Hero({ initialSocials = {} }: HeroProps) {
                 >
                     <Image
                         src="/assets/hui.webp"
-                        alt="Ferihui Character"
+                        alt="Ferihui Valorant Streamer Avatar"
                         width={800}
                         height={900}
                         className="drop-shadow-2xl object-contain h-[55vh] sm:h-[65vh] md:h-[85vh] w-auto select-none"

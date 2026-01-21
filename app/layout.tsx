@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Ferihui Stream",
   },
   description: "Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level Valorant gameplay and entertaining variety game streams.",
-  keywords: ["Ferihui", "Valorant", "Streaming", "Gamer", "Indonesia Streamer", "Valorant Clips", "Ferihui Valorant"],
+  keywords: ["Ferihui", "Valorant Streamer", "Gaming Creator", "Indonesia Vtuber", "Valorant Clips", "Ferihui Valorant", "Live Streaming", "Content Creator Indonesia"],
   authors: [{ name: "Ferihui" }],
   publisher: "Ferihui",
   openGraph: {
@@ -117,6 +117,18 @@ const jsonLd = {
         "target": "https://www.ferihui.my.id/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.ferihui.my.id/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.ferihui.my.id"
+        }
+      ]
     }
   ]
 };

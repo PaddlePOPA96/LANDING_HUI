@@ -36,7 +36,7 @@ export function About() {
                     <div className="relative w-full max-w-sm">
                         <Image
                             src="/assets/profile.webp"
-                            alt="Ferihui"
+                            alt="Ferihui Profile - Professional Caster and Content Creator"
                             width={600}
                             height={800}
                             className="object-contain drop-shadow-2xl mask-image-gradient"

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | Ferihui Stream",
   },
   description: "Ferihui is a content creator and streamer with over 5 years of experience, known for his high-level Valorant gameplay and entertaining variety game streams.",
-  keywords: ["Ferihui", "Valorant Streamer", "Gaming Creator", "Indonesia Vtuber", "Valorant Clips", "Ferihui Valorant", "Live Streaming", "Content Creator Indonesia", "restream", "watch party valorant vct", "watch party", "watchparty", "valorant", "valorant indonesia", "valo", "live valorant", "game valorant", "rrq", "rrq hui"],
+  keywords: ["Ferihui", "Valorant Streamer", "Gaming Creator", "Indonesia Vtuber", "Valorant Clips", "Ferihui Valorant", "Live Streaming", "Content Creator Indonesia", "restream", "watch party valorant vct", "watch party", "watchparty", "valorant", "valorant indonesia", "valo", "live valorant", "game valorant", "rrq", "rrq hui", "valorant partner program logo", "logo valorant partner program"],
   authors: [{ name: "Ferihui" }],
   publisher: "Ferihui",
   openGraph: {
@@ -41,13 +41,19 @@ export const metadata: Metadata = {
         height: 900,
         alt: "Ferihui Character",
       },
+      {
+        url: "/images/valorant-partner-program.png",
+        width: 1200,
+        height: 630,
+        alt: "Valorant Partner Program Logo",
+      },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ferihui Stream",
     description: "Official Hub for Ferihui - Valorant & Gaming Content.",
-    images: ["/assets/hui.png"],
+    images: ["/assets/hui.png", "/images/valorant-partner-program.png"],
   },
   icons: {
     icon: [

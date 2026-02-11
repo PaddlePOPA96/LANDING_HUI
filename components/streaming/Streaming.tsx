@@ -43,14 +43,15 @@ export function Streaming({ streams }: StreamingProps) {
                 </Reveal>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[300px]">
-                {streams.map((stream, index) => (
-                    <Reveal key={stream.id} delay={index * 0.1} width="100%">
+            <Reveal width="100%" delay={0.2}>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[300px]">
+                    {streams.map((stream, index) => (
                         <a
+                            key={stream.id}
                             href={`https://www.youtube.com/watch?v=${stream.videoId}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`group relative block rounded-2xl overflow-hidden aspect-video bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-500/20 ${index < 2 ? 'md:col-span-1 lg:col-span-1' : '' /* Standard grid */
+                            className={`group relative block rounded-2xl overflow-hidden aspect-video bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-800 transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-red-500/20 will-change-transform ${index < 2 ? 'md:col-span-1 lg:col-span-1' : '' /* Standard grid */
                                 }`}
                         >
                             <Image
@@ -81,9 +82,9 @@ export function Streaming({ streams }: StreamingProps) {
                                 </div>
                             </div>
                         </a>
-                    </Reveal>
-                ))}
-            </div>
+                    ))}
+                </div>
+            </Reveal>
         </section>
     );
 }

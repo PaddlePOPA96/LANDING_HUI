@@ -118,7 +118,7 @@ export default async function Home() {
         It creates the "curtain" or "parallax overlap" effect.
         NOW WITH BLUR/GLASS EFFECT
       */}
-      <div className="relative z-10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-[0_-50px_100px_rgba(0,0,0,0.5)] border-t border-white/10">
+      <div className="relative z-10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md shadow-[0_-50px_100px_rgba(0,0,0,0.5)] border-t border-white/10">
         <About />
         <Stats />
         <Setup valorant={setupData.valorant} gear={setupData.gear} />

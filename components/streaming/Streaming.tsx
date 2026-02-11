@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Play } from 'lucide-react';
 import { Reveal } from "../ui/Reveal";
+import { SectionHeader } from "../ui/SectionHeader";
 
 interface Stream {
     id: number;
@@ -24,21 +25,23 @@ export function Streaming({ streams }: StreamingProps) {
 
     return (
         <section id="streaming" className="container mx-auto px-6 py-24 bg-white dark:bg-zinc-950">
-            <Reveal width="100%">
-                <div className="flex flex-col items-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-black italic uppercase text-center mb-4">
-                        Latest <span className="text-red-600">Streams</span>
-                    </h2>
+            <div className="flex flex-col items-center mb-16">
+                <SectionHeader
+                    title="LATEST STREAMS"
+                    subtitle="Highlight dan rekaman live streaming terbaru."
+                    className="mb-4 items-center text-center"
+                />
+                <Reveal width="100%">
                     <a
                         href="https://www.youtube.com/@FeriHui/streams"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-zinc-500 hover:text-red-600 transition-colors uppercase tracking-widest text-sm font-bold flex items-center gap-2"
+                        className="text-zinc-500 hover:text-red-600 transition-colors uppercase tracking-widest text-sm font-bold flex items-center justify-center gap-2"
                     >
                         View All on YouTube <Play size={16} fill="currentColor" />
                     </a>
-                </div>
-            </Reveal>
+                </Reveal>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[300px]">
                 {streams.map((stream, index) => (

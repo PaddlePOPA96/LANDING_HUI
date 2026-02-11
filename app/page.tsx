@@ -3,6 +3,7 @@ import { About } from "../components/about/About";
 import { Streaming } from "../components/streaming/Streaming";
 import { Setup } from "../components/setup/Setup";
 import { Sponsors } from "../components/sponsors/Sponsors";
+import { Stats } from "../components/stats/Stats";
 import { Footer } from "../components/layout/Footer";
 import { Header } from "../components/layout/Header";
 import { ParticlesBackground } from "../components/ui/ParticlesBackground";
@@ -119,7 +120,7 @@ export default async function Home() {
       */}
       <div className="relative z-10 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-[0_-50px_100px_rgba(0,0,0,0.5)] border-t border-white/10">
         <About />
-
+        <Stats />
         <Setup valorant={setupData.valorant} gear={setupData.gear} />
         <Streaming streams={streams} />
         <Sponsors />

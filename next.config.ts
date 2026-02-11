@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'img.youtube.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'media.valorant-api.com',
+      },
     ],
     // Explicitly configure qualities to avoid warnings when using non-default qualities
     qualities: [50, 75],

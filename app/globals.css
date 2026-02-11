@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  scroll-behavior: smooth;
 }
 
 @theme inline {
@@ -40,4 +41,8 @@ body {
 
 .animate-breathe {
   animation: breathe 4s ease-in-out infinite;
+}
+
+.clip-path-slant {
+  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
 }

@@ -40,7 +40,7 @@ export function Hero({ initialSocials = {} }: HeroProps) {
     });
 
     return (
-        <section className="sticky top-0 h-screen sm:h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden">
+        <section id="hero" className="sticky top-0 h-screen sm:h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden">
             {/* Background Elements */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -114,6 +114,35 @@ export function Hero({ initialSocials = {} }: HeroProps) {
                     <SocialButton href={socials.instagram} icon={<Instagram />} label="Instagram" />
                 </div>
                 <p className="text-zinc-500 font-medium tracking-widest text-sm uppercase">Official Streamer Hub</p>
+            </motion.div>
+
+            {/* Navigation Menu - Bottom Left */}
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.5, duration: 1 }}
+                className="absolute bottom-5 left-5 md:bottom-12 md:left-12 z-20 flex flex-col gap-2"
+            >
+                {[
+                    { label: 'HERO', href: '#hero' },
+                    { label: 'ABOUT', href: '#about' },
+                    { label: 'STATS', href: '#stats' },
+                    { label: 'SETUP', href: '#setup' },
+                    { label: 'STREAMING', href: '#streaming' },
+                    { label: 'PARTNERS', href: '#sponsors' },
+                ].map((item, index) => (
+                    <a
+                        key={item.label}
+                        href={item.href}
+                        className="text-xs md:text-sm font-bold tracking-[0.2em] text-zinc-500 hover:text-indigo-500 dark:hover:text-indigo-400 transition-colors uppercase cursor-pointer"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' });
+                        }}
+                    >
+                        {item.label}
+                    </a>
+                ))}
             </motion.div>
         </section>
     );

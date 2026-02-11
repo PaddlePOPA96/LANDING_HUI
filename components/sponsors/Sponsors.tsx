@@ -2,14 +2,17 @@
 
 import Image from "next/image";
 import { Reveal } from "../ui/Reveal";
+import { SectionHeader } from "../ui/SectionHeader";
 
 export function Sponsors() {
     return (
         <section id="sponsors" className="bg-zinc-50 dark:bg-zinc-900 py-24 border-y border-zinc-200 dark:border-zinc-800">
             <div className="container mx-auto px-6 text-center">
-                <Reveal width="100%">
-                    <h3 className="text-2xl font-bold mb-12 text-zinc-400 uppercase tracking-widest">Proudly Sponsored By</h3>
-                </Reveal>
+                <SectionHeader
+                    title="PROUD PARTNERS"
+                    subtitle="Didukung oleh brand terbaik."
+                    className="items-center text-center mb-16"
+                />
 
                 <div className="flex flex-wrap items-center justify-center gap-12 md:gap-24 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
                     {/* Sponsor 1 */}

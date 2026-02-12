@@ -25,11 +25,11 @@ export function Streaming({ streams }: StreamingProps) {
 
     return (
         <section id="streaming" className="container mx-auto px-6 py-24 bg-white dark:bg-zinc-950">
-            <div className="flex flex-col items-center mb-16">
+            <div className="flex flex-col mb-16">
                 <SectionHeader
                     title="LATEST STREAMS"
                     subtitle="Highlight dan rekaman live streaming terbaru."
-                    className="mb-4 items-center text-center"
+                    className="mb-4"
                 />
                 <Reveal width="100%">
                     <a

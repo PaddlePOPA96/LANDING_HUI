@@ -51,7 +51,7 @@ export function Stats() {
                     <SectionHeader
                         title="AGENT PROFILE"
                         subtitle="Statistik dan peran favorit di dalam game."
-                        className="items-center text-center"
+                        className=""
                     />
                 </Reveal>
 

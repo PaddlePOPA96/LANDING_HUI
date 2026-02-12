@@ -34,7 +34,7 @@ export function Setup({ valorant: valSettings, gear }: SetupProps) {
                 <SectionHeader
                     title="SETUP & GEAR"
                     subtitle="Perangkat tempur untuk performa maksimal."
-                    className="items-center text-center"
+                    className=""
                 />
 
                 <div className="max-w-6xl mx-auto space-y-20">
